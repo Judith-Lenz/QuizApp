@@ -9,3 +9,15 @@ body {
   align-items: center;
   justify-content: center;
 }
+
+.quiz-card {
+  width: 30rem;
+}
+
+.question-footer {
+  border-top: 1px solid rgb(0, 0, 0, 0.4);
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  padding-top: 12px;
+}
