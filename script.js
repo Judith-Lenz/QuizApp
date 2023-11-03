@@ -66,6 +66,14 @@ function init() {
 }
 
 function showQuestion() {
+
+  if (currentQuestion >= question.length) {
+    // TODO Show Endscreen
+  } else {
+    
+  }
+
+
   let question = questions[currentQuestion];
   document.getElementById("question-number").innerHTML = currentQuestion + 1;
   document.getElementById("questiontext").innerHTML = question["question"];
