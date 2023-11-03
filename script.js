@@ -81,10 +81,14 @@ function answer(selection){
     console.log('selectedAnswerNumber is ', selectedAnswerNumber);
     console.log('Right answer is  ', question['right_answer']);
 
+    let idOFRightAnswer = `answer_${question['right_answer']}`;
+
     if (selectedAnswerNumber == question['right_answer']) {
         console.log('Richtige Antwort!!!');
+        document.getElementById(selection).parentNode.classList.add('bg-success');
     } else {
         console.log('Faaaaaaalllsch !!!');
-        
+        document.getElementById(selection).parentNode.classList.add('bg-danger');
+        document.getElementById(idOFRightAnswer).parentNode.classList.add('bg-success');
     }
 }
