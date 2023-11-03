@@ -77,13 +77,31 @@ function showQuestion() {
 function answer(selection){
     let question = questions[currentQuestion];
     let selectedAnswerNumber = selection.slice(-1);
-    let idOFRightAnswer = `answer_${question['right_answer']}`;
+    let idOfRightAnswer = `answer_${question['right_answer']}`;
 
     if (selectedAnswerNumber == question['right_answer']) {
         document.getElementById(selection).parentNode.classList.add('bg-success');
     } else {
         document.getElementById(selection).parentNode.classList.add('bg-danger');
-        document.getElementById(idOFRightAnswer).parentNode.classList.add('bg-success');
+        document.getElementById(idOfRightAnswer).parentNode.classList.add('bg-success');
     }
     document.getElementById('next-button').disabled = false;
+}
+
+function nextQuestion(){
+  currentQuestion++; // currentQuestion ist ja oben definiert als Null, daher hier um eins erhöhen.
+  document.getElementById('next-button').disabled = true;
+  resetAnswerButtons()
+  showQuestion();
+}
+
+function resetAnswerButtons(){
+  document.getElementById('answer_1').parentNode.classList.remove('bg-danger');
+  document.getElementById('answer_1').parentNode.classList.remove('bg-success');
+  document.getElementById('answer_2').parentNode.classList.remove('bg-danger');
+  document.getElementById('answer_2').parentNode.classList.remove('bg-success');
+  document.getElementById('answer_3').parentNode.classList.remove('bg-danger');
+  document.getElementById('answer_3').parentNode.classList.remove('bg-success');
+  document.getElementById('answer_4').parentNode.classList.remove('bg-danger');
+  document.getElementById('answer_4').parentNode.classList.remove('bg-success');
 }
