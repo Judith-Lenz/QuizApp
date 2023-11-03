@@ -66,13 +66,12 @@ function init() {
 }
 
 function showQuestion() {
-
-  if (currentQuestion >= question.length) {
+  if (currentQuestion >= questions.length) {
     // TODO Show Endscreen
+    document.getElementById("endScreen").style = "";
+    document.getElementById("questionBody").style = "display: none;";
   } else {
-    
   }
-
 
   let question = questions[currentQuestion];
   document.getElementById("question-number").innerHTML = currentQuestion + 1;
