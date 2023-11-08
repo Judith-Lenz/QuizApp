@@ -74,6 +74,7 @@ function showQuestion() {
     document.getElementById("questionBody").style = "display: none;";
     document.getElementById("amount-of-questions").innerHTML = questions.length;
     document.getElementById("amount-of-right-questions").innerHTML = rightQuestions;
+    document.getElementById('header-image').src = 'img/brain result.png';
   } else {
   }
 
