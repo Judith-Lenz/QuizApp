@@ -69,39 +69,26 @@ function init() {
 }
 
 function showQuestion() {
-  if (currentQuestion >= questions.length) {
-    document.getElementById("endScreen").style = "";
-    document.getElementById("questionBody").style = "display: none;";
-    document.getElementById("amount-of-questions").innerHTML = questions.length;
-    document.getElementById("amount-of-right-questions").innerHTML =
-      rightQuestions;
-    document.getElementById("header-image").src = "img/brain result.png";
+  if (gameIsOver()) {
+    showEndscreen();
   } else {
-    // show question
-
-    let percent = (currentQuestion + 1) / questions.length;
-    percent = Math.round(percent * 100);
-    document.getElementById("progess-bar").innerHTML = `${percent} %`;
-    document.getElementById("progess-bar").style = `width:${percent}%`;
-
-    console.log("Fortschritt:", percent);
-
-    let question = questions[currentQuestion];
-    document.getElementById("question-number").innerHTML = currentQuestion + 1;
-    document.getElementById("questiontext").innerHTML = question["question"];
-    document.getElementById("answer_1").innerHTML = question["answer_1"];
-    document.getElementById("answer_2").innerHTML = question["answer_2"];
-    document.getElementById("answer_3").innerHTML = question["answer_3"];
-    document.getElementById("answer_4").innerHTML = question["answer_4"];
+    updateProgressBar();
+    showNextQuestion();
   }
 }
+
+// diese Funktion spuckt entweder true oder false aus. Und das landet dann in der Funktion showQuestion.
+function gameIsOver(){
+  return currentQuestion >= questions.length;
+}
+
 
 function answer(selection) {
   let question = questions[currentQuestion];
   let selectedAnswerNumber = selection.slice(-1);
   let idOfRightAnswer = `answer_${question["right_answer"]}`;
 
-  if (selectedAnswerNumber == question["right_answer"]) {
+  if (rightAnswerSelected(selectedAnswerNumber, question)) {
     // Richtige Frage beantwortet
     document.getElementById(selection).parentNode.classList.add("bg-success");
     AUDIO_SUCCESS.play();
@@ -114,6 +101,11 @@ function answer(selection) {
     AUDIO_FAIL.play();
   }
   document.getElementById("next-button").disabled = false;
+}
+
+
+function rightAnswerSelected(selectedAnswerNumber, question){
+  return selectedAnswerNumber == question["right_answer"]
 }
 
 function nextQuestion() {
@@ -141,4 +133,30 @@ function restartGame() {
   rightQuestions = 0;
   currentQuestion = 0;
   init();
+}
+
+function showEndscreen() {
+  document.getElementById("endScreen").style = "";
+  document.getElementById("questionBody").style = "display: none;";
+  document.getElementById("amount-of-questions").innerHTML = questions.length;
+  document.getElementById("amount-of-right-questions").innerHTML =
+    rightQuestions;
+  document.getElementById("header-image").src = "img/brain result.png";
+}
+
+function showNextQuestion() {
+  let question = questions[currentQuestion];
+  document.getElementById("question-number").innerHTML = currentQuestion + 1;
+  document.getElementById("questiontext").innerHTML = question["question"];
+  document.getElementById("answer_1").innerHTML = question["answer_1"];
+  document.getElementById("answer_2").innerHTML = question["answer_2"];
+  document.getElementById("answer_3").innerHTML = question["answer_3"];
+  document.getElementById("answer_4").innerHTML = question["answer_4"];
+}
+
+function updateProgressBar(){
+  let percent = (currentQuestion + 1) / questions.length;
+  percent = Math.round(percent * 100);
+  document.getElementById("progess-bar").innerHTML = `${percent} %`;
+  document.getElementById("progess-bar").style = `width:${percent}%`;
 }
